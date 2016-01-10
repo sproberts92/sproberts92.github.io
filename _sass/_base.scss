@@ -38,6 +38,10 @@ ul, ol, dl, figure,
     margin-bottom: $spacing-unit / 2;
 }
 
+.centre-block {
+    text-align: center;
+    display: block;
+}
 
 
 /**
@@ -48,6 +52,9 @@ img {
     vertical-align: middle;
 }
 
+.centre-fig {
+    display: inline-block;
+}
 
 
 /**
@@ -59,6 +66,8 @@ figure > img {
 
 figcaption {
     font-size: $small-font-size;
+    text-align: center;
+    display: block;
 }
 
 
