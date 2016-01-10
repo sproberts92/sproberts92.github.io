@@ -20,7 +20,7 @@ The data is saved in the following format
 # Histograms
 Unless you have the head for it, viewing things in 3D can be confusing when you're looking on a flat screen or piece of paper, so we want a way to visualise things that works naturally in 2D. The most na&#239;ve way to go about this is to simply discard the data for one dimension, in effect squashing the sphere flat. Lets see what it looks like with a simple scatter plot using Python:
 
-``` python
+{% highlight python %}
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -30,7 +30,7 @@ x, y, _ = data.T
 plt.plot(x, y, ',')
 plt.axes().set_aspect('equal')
 plt.show()
-```
+{% endhighlight %}
 
 The `','` option simply sets the point markers to be individual pixels. Anything bigger and we end up with so much overlap that we're just looking at a blue circle. Figure 1 shows the result for 10,000 points.
 
@@ -47,9 +47,9 @@ Well... That's ok I guess, but its pretty hard to interpret. It's even more diff
 
 Fortunately the solution, particularly in the many points case, is simple -- just bin the data. The result is a histogram. In general this is one of the simplest ways to get nice plots out of dense or noisy data sets as the binning smooths things out. In Python its as simple as changing `plt.plot(x, y, ',')` to 
 
-``` python
+{% highlight python %}
 plt.hist2d(x, y, bins=100)
-```
+{% endhighlight %}
 
 where, as you might guess, `bins` sets the number of bins in each direction. 
 
@@ -67,9 +67,9 @@ As you can see, this easily supports many more points than the scatter method. T
 # Making use of the z coordinate
 Now that we have a nice way of dealing with large data sets we can tackle the bigger problem. Earlier we took the most na&#239;ve way of taking the 3D data and making it 2D, we unpacked the $$z$$ coordinate into an empty variable `_`
 
-``` python
+{% highlight python %}
 x, y, _ = data.T
-```
+{% endhighlight %}
 
 When we do this we lose all information about whether the points are on the front or the back of the sphere. What if there were more points on the back than the front? We wouldn't know. 
 
@@ -77,14 +77,14 @@ In addition, we really only have a good view of the front of the sphere whereas 
 
 We could try doing some sort of coordinate transformation to rotate the sphere:
 
-``` python
+{% highlight python %}
 theta = np.pi / 16.0
 rotation = np.array([[np.cos(theta), 0,  -np.sin(theta)],
                      [0,             1,               0],
                      [np.sin(theta), 0,  np.cos(theta)]])
 
 data_rot = np.array([np.dot(rotation, point) for point in data])
-```
+{% endhighlight %}
 
 I looped the above code over a number of values for theta between $$0$$ and $$\frac{\pi}{2}$$ and put the resultant frames together into an animation (figure 7).
 
@@ -155,7 +155,7 @@ which is an area element in the planar coordinates! Great! As a quick point of c
 
 Now we can be confident that the projection is not going to mess with the way we view the distribution of points on the surface. Let's see what it looks like (back in Cartesian coordinates now):
 
-```python
+{% highlight python %}
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -166,7 +166,7 @@ X, Y = [np.sqrt(2 / (1 - z)) * x, np.sqrt(2 / (1 - z)) * y]
 plt.hist2d(X, Y, bins=100)
 plt.axes().set_aspect('equal')
 plt.show()
-```
+{% endhighlight %}
 
 The result is visible in figure 8. What are we looking at here? First and foremost we can see the *whole* surface (well, except the point $$(0,0,1)$$). Think about placing a ball on a plane, making a hole in top and then flattening the sphere down onto the plane by pulling open the hole. Points that are near the plane suffer less distortion and points that are near the hole get very stretched. In our case the sphere has been unwrapped from the side farthest away from us, onto a plane that is in contact with the close side. We could choose to unwrap around a different point -- if there was a particular feature that we wanted to get an undistorted look at then we could unwrap around that instead. Although the whole picture is quite a distorted version of the surface of the sphere, the density of the points has been conserved by the projection as we proved above. We can now really clearly see the hotspots and how they have occurred at the four 'corners' of the sphere.
 

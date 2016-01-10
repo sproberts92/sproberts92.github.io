@@ -1,4 +1,5 @@
 _site
 _drafts
+venv
 .sass-cache
 .jekyll-metadata
