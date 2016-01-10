@@ -3,13 +3,11 @@ layout: page
 title: About
 permalink: /about/
 ---
+I am a part way through my master's in theoretical physics. I have created this blog for two reasons:
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+* to practice writing about topics related to science and programming
+* to learn more about HTML and CSS
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
+As I work on the second point I intend to gradually improve the appearance of the site beyond the default Jekyll theme.
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+Hopefully you learn something interesting from the posts here. Thank you for visiting.
