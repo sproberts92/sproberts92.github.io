@@ -12,4 +12,4 @@ github_username:  sproberts92
 # Build settings
 markdown: kramdown
 kramdown:
-  syntax_highlighter: pygments
+  syntax_highlighter: rouge
